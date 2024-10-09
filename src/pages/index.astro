@@ -1,16 +1,70 @@
 ---
+import Layout from "../layouts/Layout.astro"
+import TechCard from "../components/TechCard.astro"
+
+interface TechItem {
+	title: string;
+	tech: string[];
+}
+
+const techItems: TechItem[] = [
+	{
+		title: "IA",
+		tech: ["Dataflows", "ML Supervisado", "ML No Supervisado", "IA Generative"]
+	},
+	{
+		title: "Desarrollo Web",
+		tech: ["HTML", "CSS", "JavaScript", "React", "Node.js", "Express", "Django"]
+	},
+	{
+		title: "Bases de Datos",
+		tech: ["SQL", "MongoDB", "Firebase", "SQLite"]
+	},
+	{
+		title: "DevOps",
+		tech: ["Docker", "Kubernetes", "GitHub Actions", "GitLab CI"]
+	},
+	{
+		title: "Herramientas",
+		tech: ["Git", "GitHub", "GitLab", "VS Code", "Postman", "Insomnia"]
+	}
+]
 
 ---
+<Layout title="Uayeb Caballero">
+        <section id="about" class="mb-16">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Sobre Mí</h1>
+            <p class="text-gray-600 mb-4">
+                Soy un desarrollador web apasionado por crear soluciones innovadoras y eficientes. 
+                Me encanta aprender nuevas tecnologías y enfrentar desafíos que me permitan crecer profesionalmente.
+            </p>
+        </section>
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+        <section id="technologies" class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Mis Tecnologías</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+
+				{ techItems.map( ( item ) => (
+					<TechCard title={item.title} tech={ item.tech } />
+				) ) }
+
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Proyectos Trabajados</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded shadow">
+                    <h3 class="font-semibold text-xl mb-2">E-commerce Platform</h3>
+                    <p class="text-gray-600 mb-4">Desarrollé una plataforma de comercio electrónico completa utilizando React para el frontend y Node.js con Express para el backend.</p>
+                    <a href="#" class="text-light-blue hover:text-dark-blue">Ver más →</a>
+                </div>
+                <div class="bg-white p-6 rounded shadow">
+                    <h3 class="font-semibold text-xl mb-2">Task Management App</h3>
+                    <p class="text-gray-600 mb-4">Creé una aplicación de gestión de tareas con Django y React, implementando autenticación de usuarios y almacenamiento en la nube.</p>
+                    <a href="#" class="text-light-blue hover:text-dark-blue">Ver más →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
