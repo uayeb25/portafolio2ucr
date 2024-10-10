@@ -1,11 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro"
 import TechCard from "../components/TechCard.astro"
+import ProjectCard from "../components/ProjectCard.astro";
+
+import { getCollection } from "astro:content";
 
 interface TechItem {
 	title: string;
 	tech: string[];
 }
+
+interface ProjectItem{
+	slug: string;
+	data: {
+		title: string;
+		shortDescription: string;
+	}
+}
+
+const projects: ProjectItem[] = await getCollection("projects");
 
 const techItems: TechItem[] = [
 	{
@@ -54,16 +67,16 @@ const techItems: TechItem[] = [
         <section id="projects">
             <h2 class="text-3xl font-bold text-gray-800 mb-4">Proyectos Trabajados</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded shadow">
-                    <h3 class="font-semibold text-xl mb-2">E-commerce Platform</h3>
-                    <p class="text-gray-600 mb-4">Desarrollé una plataforma de comercio electrónico completa utilizando React para el frontend y Node.js con Express para el backend.</p>
-                    <a href="#" class="text-light-blue hover:text-dark-blue">Ver más →</a>
-                </div>
-                <div class="bg-white p-6 rounded shadow">
-                    <h3 class="font-semibold text-xl mb-2">Task Management App</h3>
-                    <p class="text-gray-600 mb-4">Creé una aplicación de gestión de tareas con Django y React, implementando autenticación de usuarios y almacenamiento en la nube.</p>
-                    <a href="#" class="text-light-blue hover:text-dark-blue">Ver más →</a>
-                </div>
+
+
+				{ projects.map( ( p ) => (
+					<ProjectCard 
+						title={ p.data.title }
+						description={ p.data.shortDescription }
+						link={ `/projects/${ p.slug }` }
+					/>
+				) ) }
+
             </div>
         </section>
     </main>
